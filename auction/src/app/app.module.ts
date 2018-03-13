@@ -14,6 +14,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Code404Component } from './code404/code404.component';
 import { StockFormComponent } from './stock/stock-form/stock-form.component';
+import {StockService} from './stock/stock.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -41,7 +42,7 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [StockService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
