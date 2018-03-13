@@ -10,7 +10,18 @@ import { MenuComponent } from './menu/menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { StockManagerComponent } from './stock/stock-manager/stock-manager.component';
 import { StarsComponent } from './stars/stars.component';
+import {RouterModule, Routes} from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { Code404Component } from './code404/code404.component';
+import { StockFormComponent } from './stock/stock-form/stock-form.component';
 
+const routes: Routes = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: DashboardComponent},
+  {path: 'stock', component: StockManagerComponent},
+  {path: 'stock/:id', component: StockFormComponent},
+  {path: '**', component: Code404Component}
+]
 
 @NgModule({
   declarations: [
@@ -21,10 +32,14 @@ import { StarsComponent } from './stars/stars.component';
     MenuComponent,
     SidebarComponent,
     StockManagerComponent,
-    StarsComponent
+    StarsComponent,
+    DashboardComponent,
+    Code404Component,
+    StockFormComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

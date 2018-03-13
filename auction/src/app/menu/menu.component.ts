@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  public MenuList: Array<Menu>;
 
-  ngOnInit() {
+  public CurrentId: number;
+
+  constructor(private router: Router) {
+    this.router.events.filter(event => event instanceof NavigationEnd )
+      .subscribe((event: NavigationEnd) => {
+        if (event.url == '/home'){
+          this.CurrentId = 1;
+        }else if (event.url == '/stock'){
+          this.CurrentId = 2;
+        }
+      });
   }
 
+  ngOnInit() {
+    this.CurrentId = 1;
+    this.MenuList = [
+      new Menu(1, '首页', '/home'),
+      new Menu(2, '股票详情', '/stock')
+    ];
+  }
+
+}
+
+export class Menu {
+  constructor(public id: number, public name: string, public url: string) {}
 }
